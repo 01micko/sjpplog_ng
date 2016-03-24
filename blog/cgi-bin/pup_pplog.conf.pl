@@ -4,7 +4,7 @@ our $config_blogTitle = 'The Blog';															# Blog title
 our $config_adminPass = 'Password1';												# Admin password for adding entries
 our $config_blogStart = 'Mar 2016';												# date the blog commenced - optional
 ## sc0ttman BOF
-our $config_wwwFolder = '/my/path/on/server/puppyblog/www/blog';		# Path to webserver root directory, needed for getStyles and changeStyle function
+our $config_wwwFolder = '/my/path/on/server/puppyblog/www/blog';		# Path to webserver root directory
 our $config_JSFilesFolder = '/www/blog/js';														# javascripts folder
 our $config_imgFilesFolder = '/www/blog/images';											# images folder - where you upload your images
 our $config_imgThumbsFolder = '/www/blog/thumbs';									# images thumbnail.. NOTE: use same filenames as the full size images!
@@ -27,7 +27,7 @@ our $config_enableYear = 2016;										#copyright year
 our $config_smiliesFolderName = 'smilies';									# Smilies Folder Name, DO NOT change this...
 our $config_dbFilesExtension = 'ppl';												# Extension of the files used as databases
 ## secure password
-our $config_adminPassFile = $config_wwwFolder.'/secure/admin.ppl';		#main admin password
+our $config_adminPassFile = $config_wwwFolder.'/secure/admin.ppl';		#main admin password DO NOT change this...
 our $config_entriesPerPage = 10;													# For pagination... How many entries will be displayed per page?
 our $config_showPageCheckbox = 0;											#checkbox for pages
 our $config_maxPagesDisplayed = 5;											# Maximum number of pages displayed at the bottom
