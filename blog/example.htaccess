@@ -1,0 +1,2 @@
+Options Includes FollowSymLinks +ExecCGI
+DirectoryIndex ./cgi-bin/index.pl

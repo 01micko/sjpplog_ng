@@ -1,0 +1,270 @@
+/****************************************
+*	This is the style sheet of PPLOG
+*	Edit this as you wish.		
+*	Designed by Federico Ramirez	
+*	A.K.A fedekun			
+****************************************/
+/* 220513 updated stylesheet, main (content) 
+links are now red on hover */
+
+#anchor {
+	background-image:url(default/comment.gif);
+	background-repeat: no-repeat;
+	vertical-align: bottom;
+	padding-left: 12px;
+}
+
+#menubar {
+ position:absolute;
+ left:0px;
+ top:2px;
+}
+
+body {
+	/*font-family: Verdana, Arial, Helvetica, sans-serif;*/
+	/*font-size: 12px;*/
+	color: #222222;
+	background-color: #FAFAFA;
+	/*background-image:url(default/bg.gif);*/
+	background-repeat: repeat-x;
+}
+
+table {
+	font-size: 12px;
+}
+
+input, button, textarea, select, radio {
+	padding: 2px;
+	border: 1px solid #8FB236;
+	color: #347499;
+	background-color: white;
+	/*font-family: Verdana, Arial, Helvetica, sans-serif;*/
+	/*font-size: 12px;*/
+}
+
+div#header {
+	top: 0;
+	left: 0;
+	position: fixed;
+	width: 100%;
+	height: 70px;
+	padding-left: 25%;
+	background: #4AAFEA; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(#51B3EA, #30A4E7;); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#51B3EA, #30A4E7;); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#51B3EA, #30A4E7;); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#51B3EA, #30A4E7;); /* Standard syntax */
+	box-shadow: 4px 4px 4px #888888;
+	z-index: 10;
+}
+
+div#subbox {
+	bottom: 0;
+	width: 800px;
+	height: auto;
+	padding-left: 40px;
+	padding-top: 30px;
+	background-image:url(default/puppylogo48.png);
+	background-size: 32px 32px;
+	background-position: 0px 20px;
+	background-repeat: no-repeat;
+	font-size: 1.4em;
+	color: #fff;
+}
+
+div#all {
+	width: 90%;
+	margin: auto;
+	min-height: 600px;
+	
+	/*BK background-position: center top; */
+	background-repeat: no-repeat;
+	padding-top: 106px;
+	padding-left: 20px;
+	background-color:  #FAFAFA;
+	/* border-top: 1px dashed silver;
+	border-left: 1px dashed silver;
+	border-right: 1px dashed silver; */
+}
+
+/* nexus 7 and ipad mini */
+@media  screen and (min-width: 7in) and (max-width: 9in)
+{
+div#all {
+	width: 100%;
+}
+}
+
+@media  screen and (max-width: 1359px) {
+div#all {
+	width: 100%;
+}
+}
+
+a#mobile {font-size:0px;}
+
+*::-moz-selection {
+	background-color:#8FB236;
+	color: white;
+}
+
+div#menu {
+	float: left;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	width: 220px;
+	letter-spacing: -1px;
+	background:  rgba(200,200,200,0.3);
+	border-radius: 10px 10px;
+	border: 1px solid #ccc;
+	line-height: 130%;
+}
+
+@media  screen and (max-width: 768px) {
+div#menu {
+	width: 70%;
+	padding-left: 25%;
+	font-size: 2em;
+}
+}
+
+#menu h1 {
+	color: #347499;
+	padding: 0px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	font-size: 1.2em;
+}
+
+#menu a {
+	display: block;
+	color: #347499;
+	text-transform: capitalize;
+	padding-left: 5px;
+	text-decoration: none;
+}
+
+#menu a:hover {
+	padding-left: 7px;
+}
+
+div#content {
+	/*float: right;*/
+	padding-right: 15px;
+	padding-left: 15px;
+	width: 60%;
+	margin: auto;
+	/* border-left: 1px dashed silver; */
+	padding-left: 10px;
+	min-height: 600px;
+	line-height: 130%;
+}
+
+@media  screen and (max-width: 1279px) {
+div#content {
+	width: 50%;
+}
+}
+
+@media  screen and (max-width: 950px) {
+div#content {
+	width: 40%;
+}
+}
+
+@media  screen and (max-width: 768px) {
+div#content {
+	width: 80%;
+	font-size: 1.8em;
+}
+}
+
+#content h1 {
+	font-size: 1.6em;
+	border-bottom: 1px solid silver;
+	width: 100%;
+	margin-bottom: 5px;
+	padding: 10px;
+	letter-spacing: 2px;
+}
+
+#content a {
+	color: #0E4D72;
+	text-decoration: none;
+	font-weight: bold;
+}
+#content a:hover {
+	color: #800000;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+div#footer {
+	clear: both;
+	text-align: center;
+	font-size: 11px;
+	color: #666666;
+	padding-top: 15px;
+	letter-spacing: 2px;
+}
+
+#footer a {
+	color: black;
+	text-decoration: none;
+	letter-spacing: -1px;
+}
+
+img.map {
+	width: 210px;
+}
+
+@media  screen and (max-width: 768px) {
+img.map {
+	width: 310px;
+}
+}
+
+.code {
+	border: 1px solid silver;
+	/*background-color: #F1F1F1;*/
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #111111;
+	font-size: 11px;
+	padding: 2px 10px 2px 10px;
+	margin: 2px 10px 2px 10px;
+	line-height: 1em;
+	height: auto;
+	max-height: 300px;
+	overflow: auto;
+}
+
+/* sc0ttman - persistent styling for code 
+highlighting on PPLOG */
+html .prettyprint { 
+	border: 0px solid silver; 
+}
+
+.error {
+	align: center;
+	margin-left:auto;
+	margin-right:auto;
+	color:#cc0000;
+	background-color: white;
+	font-weight: bold;
+	padding:4px;
+}
+.quote {
+	border: 1px solid silver;
+	padding: 2px;
+	margin: 2px;
+}
+
+@media print{
+
+div#all {padding-top:0px;}
+
+div#menu, form, img {display:none;}
+
+div#content {width:100%;}
+div#content a, div#content h1 {color:black;}
+}

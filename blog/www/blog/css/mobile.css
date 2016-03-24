@@ -1,0 +1,129 @@
+/****************************************
+*	This is the style sheet of PPLOG	*
+*	Edit this as you wish.				*
+*	Designed by Federico Ramírez		*
+*	A.K.A fedekun						*
+****************************************/
+/* 220513 updated stylesheet, main (content) links are now red on hover */
+
+#anchor {
+	background-image:none;
+	background-repeat: no-repeat;
+	vertical-align: bottom;
+	padding-left: 1em;
+}
+
+table {
+	font-size: 1em;
+}
+
+input {
+	padding:10px;
+	font-size:0.8em;
+}
+
+div#all {
+	width: 100%;
+	margin: auto;
+	margin-top: 100px;
+	min-height: 100%;
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-size:100%;
+	padding-top: 1em;
+	background-color: white;
+	font-size: 1em;
+	/* border-top: 1px dashed silver;
+	border-left: 1px dashed silver;
+	border-right: 1px dashed silver; */
+}
+
+a#mobile {font-size:1.2em; display:block; text-decoration:none; background-color:#347499; color:white; text-align:center;}
+
+div#header {position: absolute; height: 50px;}
+
+div#subbox {padding-top: 10px;background-position: 0px 5px;}
+
+div#menu { float:none; padding:5%; width:90%; text-align:center; font-size:1.25em;}
+
+div.show, div.hide {display:none;}
+
+div#menu:hover div.show {display:block; text-align:center;}
+
+#menu h1 {
+	color: #347499;
+	padding: 0px;
+	margin-top: 0.5em;
+	margin-bottom: 0px;
+	font-size: 1.1em;
+}
+
+#menu a {
+	display: block;
+	color: #347499;
+	text-transform: capitalize;
+	padding: 0.5em;
+	text-decoration: none;
+}
+
+#menu a:hover {
+	padding-left: 1px;
+}
+
+div#content {
+	float: none;
+	padding-right: 0px;
+	width: 90%;
+	/* border-left: 1px dashed silver; */
+	padding-left: 0px;
+	min-height: 90%;
+}
+
+#content h1 {
+	font-size: 1.2em;
+	border-bottom: 1px solid silver;
+	margin-bottom: 5px;
+	padding: 0px;
+	letter-spacing: 2px;
+}
+
+
+div#footer {
+	clear: both;
+	text-align: center;
+	font-size: 0.7em;
+	color: #666666;
+	padding-top: 1em;
+	letter-spacing: 2px;
+}
+
+#footer a {
+	color: black;
+	text-decoration: none;
+	letter-spacing: -1px;
+}
+
+.code {
+	border: 1px solid silver;
+	/*background-color: #F1F1F1;*/
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #111111;
+	font-size: 1.25em;
+	padding: 0.5em;
+	margin: 0.5em;
+	line-height: 1em;
+	height: auto;
+	max-height: 50%;
+	overflow: auto;
+}
+
+/* sc0ttman - persistent styling for code highlighting on PPLOG */
+html .prettyprint { 
+	border: 0px solid silver; 
+}
+
+.quote {
+	border: 1px solid silver;
+	padding: 2px;
+	margin: 2px;
+}
