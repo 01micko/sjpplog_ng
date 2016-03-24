@@ -2477,7 +2477,7 @@ else
 		print 'No entries created. Why dont you <a href="?do=newEntry">make one</a>?';
 	}
 }
-print '</div></div><div id="footer">&copy; Copyright '.$config_blogTitle.' and respective Authors '.$config_enableYear.' - All Rights Reserved<br> Licenced under CC BY-NC-SA 4.0 Licence. All code licenced uner GPLv2 or later unless otherwise stated. <br><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC Licence"><img style="height:24" src="'.$config_imgFilesFolder.'/by-nc-sa.png" alt="CC-BY-SA logo" /></a><a href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html" title="GPL2 Licence"><img style="height:24" src="'.$config_imgFilesFolder.'/gpl.png" alt="GPL2 logo" /></a> <br>  Powered by <a href="http://pplog.scottjarvis.com/">SJPPLOG</a>'; print '<br>All posts are using GMT '.$config_gmt if $config_showGmtOnFooter == 1; print '</div>';
+print '</div></div><div id="footer">&copy; Copyright '.$config_blogTitle.' and respective Authors '.$config_enableYear.' - All Rights Reserved<br> '.$config_licenceMessage.' '.$config_licenceMessageExtra.' <br>'.$config_licenceImage.'<br>  Powered by <a href="https://github.com/01micko/sjpplog_ng">SJPPLOG_NG</a>'; print '<br>All posts are using GMT '.$config_gmt if $config_showGmtOnFooter == 1; print '</div>';
 print '<noscript><p style="text-align:center;">This page is best viewed with Javascript enabled</noscript>';
 print '</body></html>';
 }
