@@ -9,7 +9,7 @@ as all data is kept in flat files.
 
  - _multiuser_ capability: the blog can have multiple posters
  - beefed up security
- - extra fetures such as extra sharing options and a new "hit" map by @jamesbond3142;
+ - extra features such as extra sharing options and a new "hit" map by @jamesbond3142;
  see [here](http://www.lightofdawn.org/blog/?viewDetailed=00030)
  - other bugfixes and enhancements
  
