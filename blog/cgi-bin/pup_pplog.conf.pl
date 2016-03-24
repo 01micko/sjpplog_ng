@@ -84,6 +84,10 @@ our $config_useHtmlOnEntries = 0;												# Allow HTML when making a new post
 our $config_useWYSIWYG = 0;															# Requires HTML on entries (above) to work.. this wont allow smilies
 our $config_onlyNumbersOnCAPTCHA = 1;									# Use only numbers on CAPTCHA
 our $config_CAPTCHALength = 8;													# Just to make different codes
+our $config_licenceMessage = 'Licenced under CC BY-NC-SA 4.0 Licence.';			# licence message
+our $config_licenceMessageExtra = '';											# optional extra licence message
+our $config_licenceImage = '<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC Licence">
+<img style="height:24" src="'.$config_imgFilesFolder.'/by-nc-sa.png" alt="CC-BY-SA logo" /></a>';		# optional licence logo(s) possibly with links
 #
 return 1;
 # End Of Main PPLOG Configuration, if you dont know what you are doing, dont touch anything else please ^_^
