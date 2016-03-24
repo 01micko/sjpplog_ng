@@ -199,7 +199,7 @@ http://www.w3.org/TR/html4/loose.dtd>
 <meta name="Revisit-After" content="'.$config_metaRevisitAfter.'" />
 <meta name="Keywords" content="'.$config_metaKeywords.'" />
 <meta name="Description" content="'.$config_metaDescription.'" />
-<title>'.$config_blogTitle.' - Powered by SJPPLOG</title>
+<title>'.$config_blogTitle.' - Powered by SJPPLOG_NG</title>
 '.$jquery_init.'
 '.$jqueryCodeHighlight_init.$jqueryLightbox_init.'
 <script language="javascript" type="text/javascript">
@@ -394,7 +394,7 @@ if($config_socialAllowed == 1)
 	if($config_twitterAllowed == 1)
 	{
 		#if twitter
-		print '<a href="https://twitter.com/share?&text=Check%20out%20this%20post!&hashtags=blog" class="twitter-share-button" target="_blank">Tweet <img border="0" src="'.$config_imgFilesFolder.'/twitter.gif" /></a>';
+		print '<a href="https://twitter.com/share?&text=Check%20out%20this%20post!&hashtags=puppylinux,linux" class="twitter-share-button" target="_blank">Tweet <img border="0" src="'.$config_imgFilesFolder.'/twitter.gif" /></a>';
 	}
 	if($config_facebookAllowed == 1)
 	{
@@ -767,11 +767,11 @@ elsif(r('process') eq 'sendMail')
 	if (grep {/.+\@.+\..+/} $email)
 	{
 		print "Sending message.";
-		my $content = "Hello, I am sending this mail beacuse $user has requested to post at $config_blogTitle: http://".$ENV{'HTTP_HOST'}.$ENV{'REQUEST_URI'}."\nUser: $user\nPassword: $pass\nEmail: $email\nComment: $content\n";
+		my $content = "Hello, I am sending this mail because $user has requested to post at $config_blogTitle: http://".$ENV{'HTTP_HOST'}.$ENV{'REQUEST_URI'}."\nUser: $user\nPassword: $pass\nEmail: $email\nComment: $content\n";
 		open (MAIL,"|/usr/sbin/sendmail -t");
 		print MAIL "To: $config_sendMailWithNewCommentMail\n";
-		print MAIL "From: SJPPLOG \n";
-		print MAIL "Subject: New Registration on your SJPPLOG Blog\n\n";
+		print MAIL "From: SJPPLOG_NG \n";
+		print MAIL "Subject: New Registration on your SJPPLOG_NG Blog\n\n";
 		print MAIL $content;
 		close(MAIL);
 		print "Your message has been sent.";
@@ -1246,6 +1246,11 @@ elsif(r('process') eq 'saveMember')
 	}
 	else
 	{
+		# first add them to commenters
+		open(CFILE, ">>$config_commentsDatabaseFolder/users.$config_dbFilesExtension.dat") or dienice("Could not open file.");
+		print CFILE $bloguser."'".crypt($pass, $config_randomString).'"';
+		close CFILE;
+		
 		$baseFile = $config_postsDatabaseFolder.'/users.'.$config_dbFilesExtension.'.dat';
 	}
 	open(FILE, ">>$baseFile") or dienice("Could not open file.");
@@ -2064,8 +2069,8 @@ elsif(r('sendComment') ne '')
 					my $content = "Hello, i am sending this mail beacuse $author commented on your blog: http://".$ENV{'HTTP_HOST'}.$ENV{'REQUEST_URI'}."\nTitle: $title\nComment: $content\nDate: $date\n\nRemember you can disallow this option changing the ".'$config_sendMailWithNewComment Variable to 0';
 					open (MAIL,"|/usr/sbin/sendmail -t");
 					print MAIL "To: $config_sendMailWithNewCommentMail\n";
-					print MAIL "From: SJPPLOG \n";
-					print MAIL "Subject: New Comment on your SJPPLOG Blog\n\n";
+					print MAIL "From: SJPPLOG_NG \n";
+					print MAIL "Subject: New Comment on your SJPPLOG_NG Blog\n\n";
 					print MAIL $content;
 					close(MAIL);
 				}
