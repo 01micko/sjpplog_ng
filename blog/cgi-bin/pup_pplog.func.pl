@@ -176,11 +176,15 @@ sub getComments
 	@comments = reverse(@comments);			# We want newer first right?
 }
 
+sub dienice {
+	print @_;
+	exit 1;
+}
 # sc0ttman BOF
 sub getStyles		# This function is to get the style*.css files in $config_currentStyleFolder
 {
 	# search in a few places, to get around different setups
-	opendir(DIR, "$config_wwwFolder"."/css") or die "Can't open dir $config_wwwFolder"."/css";
+	opendir(DIR, "$config_wwwEditFolder/$config_currentStyleFolder") or dienice("Can't open dir $config_wwwEditFolder/$config_currentStyleFolder");
 	my @styles = grep {/style.*?\.css/} readdir DIR; # get only "style*.css" files from DIR
 	my @styles = sort(@styles);
 	closedir(DIR);
@@ -189,7 +193,7 @@ sub getStyles		# This function is to get the style*.css files in $config_current
 
 sub fixMissingStyles   #020713
 {
-	if ( !-f "$config_wwwFolder/css/$config_currentStylesheet" )
+	if ( !-f "$config_wwwEditFolder/$config_currentStyleFolder/$config_currentStylesheet" )
 	{
 		our $missing_stylesheet = "$config_currentStylesheet";
 		our $config_currentStylesheet = 'style1.css'; #set as default
@@ -201,9 +205,5 @@ sub fixMissingStyles   #020713
 	}
 }
 
-sub dienice {
-	print @_;
-	exit 1;
-}
 # sc0ttman EOF
 return 1;

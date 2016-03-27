@@ -806,7 +806,7 @@ elsif(r('process') eq 'editConfigFiles') #020713
 			$auth = 1;
 		}
 	}
-	
+	my $editFolder = "$config_wwwEditFolder/$config_currentStyleFolder";
 	if($auth == 1)
 	{
 		my $configFile = "pup_pplog.conf.pl";
@@ -816,7 +816,7 @@ elsif(r('process') eq 'editConfigFiles') #020713
 		open (FILE, $configFile) or print 'Could not open Config file';
 		while (<FILE>){$content .= $_;}
 		close FILE;
-		open (FILE, $config_wwwFolder.'/css/'.$config_currentStylesheet) or print 'Could not open stylesheet file';
+		open (FILE, "$editFolder/$config_currentStylesheet") or print 'Could not open stylesheet file';
 		while (<FILE>){$content2 .= $_;}
 		close FILE;
 		print '<h1>Change the settings of the blog</h1>
@@ -922,7 +922,25 @@ elsif(r(process) eq 'editPass')
 }
 elsif(r('process') eq 'saveConfig')
 {
-	if (r('pass') eq $config_adminPass && r('content') ne ''&& r('content2') ne '')
+	my $pass = r('pass');
+	my $adminPass = '';
+	if(-s $config_adminPassFile)
+	{
+		# authenticate adminPass
+		open(FILE, "<$config_adminPassFile");
+		my $adminPass = '';
+		while(<FILE>)
+		{
+			$adminPass.=$_;
+		}
+		close(FILE);
+		if(crypt($pass, $config_randomString) ne $adminPass)
+		{
+			dienice("Passwords do not match!");
+		}
+	}
+	my $editFolder = "$config_wwwEditFolder/$config_currentStyleFolder";
+	if (r('content') ne '' && r('content2') ne '')
 	{
 		my $content = basic_r('content');
 		my $content2 = basic_r('content2');
@@ -932,7 +950,7 @@ elsif(r('process') eq 'saveConfig')
 			dienice("Could not back up Config file, changes not saved.");
 			
 		}
-		unless (rename ("$config_wwwFolder/css/$config_currentStylesheet", "$config_wwwFolder/css/$config_currentStylesheet.bak"))
+		unless (rename ("$editFolder/$config_currentStylesheet", "$editFolder/$config_currentStylesheet.bak"))
 		{
 			dienice("Could not back up Stylesheet file, changes not saved.");
 			
@@ -940,7 +958,7 @@ elsif(r('process') eq 'saveConfig')
 		open (FILE, ">$configFile");
 		print FILE $content and print '<br />Your config options have been changed.';
 		close FILE;
-		open (FILE, ">$config_wwwFolder/css/$config_currentStylesheet");
+		open (FILE, ">$editFolder/$config_currentStylesheet");
 		print FILE $content2 and print '<br />Your stylesheet has been updated.';
 		close FILE;
 		print '<br /><br /><a href="?page=1">Return to homepage</a>';
@@ -2470,7 +2488,14 @@ else
 		print 'No entries created. Why dont you <a href="?do=newEntry">make one</a>?';
 	}
 }
-print '</div></div><div id="footer">&copy; Copyright '.$config_blogTitle.' and respective Authors '.$config_enableYear.' - All Rights Reserved<br> '.$config_licenceMessage.' '.$config_licenceMessageExtra.' <br>'.$config_licenceImage.'<br>  Powered by <a href="https://github.com/01micko/sjpplog_ng">SJPPLOG_NG</a>'; print '<br>All posts are using GMT '.$config_gmt if $config_showGmtOnFooter == 1; print '</div>';
+print '</div></div><div id="footer">&copy; Copyright '.$config_blogTitle.' and respective Authors '.$config_enableYear.' - All Rights Reserved<br> '.$config_licenceMessage.'<br>';
+foreach(@config_licenceMessageExtra) 
+{
+	print $_.' <br>';
+}
+print $config_licenceImage.'<br>';
+print 'Powered by <a href="https://github.com/01micko/sjpplog_ng">SJPPLOG_NG</a>'; 
+print '<br>All posts are using GMT '.$config_gmt if $config_showGmtOnFooter == 1; print '</div>';
 print '<noscript><p style="text-align:center;">This page is best viewed with Javascript enabled</noscript>';
 print '</body></html>';
 }

@@ -5,6 +5,7 @@ our $config_adminPass = 'Password1';												# Admin password for adding entr
 our $config_blogStart = 'Mar 2016';												# date the blog commenced - optional
 ## sc0ttman BOF
 our $config_wwwFolder = '/my/path/on/server/puppyblog/www/blog';		# Path to webserver root directory
+#our $config_wwwEditFolder = '/maybe/a/different/path/public_html/puppyblog';		# Path if different to above for css (see the func file)
 our $config_JSFilesFolder = '/www/blog/js';														# javascripts folder
 our $config_imgFilesFolder = '/www/blog/images';											# images folder - where you upload your images
 our $config_imgThumbsFolder = '/www/blog/thumbs';									# images thumbnail.. NOTE: use same filenames as the full size images!
