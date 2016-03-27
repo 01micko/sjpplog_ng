@@ -507,20 +507,8 @@ if($config_showHits == 1)
 	# Display Hits
 	
 	# Check hits
-	open(FILE, "<$config_postsDatabaseFolder/hits.$config_dbFilesExtension.hits");
-	my $content;
-	while(<FILE>)
-	{
-		$content.=$_;
-	}
-	close FILE;
-			
-	# Add hits
-	open(FILE, ">$config_postsDatabaseFolder/hits.$config_dbFilesExtension.hits");
-	print FILE ++$content;
-	close FILE;
-	
-	print '<a id=x>Hits: <b>'.$content.'</b> <small> (since '.$config_blogStart.')</small></a>';
+	my $hits = `wc -l < "$config_postsDatabaseFolder/online.$config_dbFilesExtension.uo"`;
+	print '<a id=x>Hits: <b>'.$hits.'</b> <small> (since '.$config_blogStart.')</small></a>';
 }
 if($config_showMap == 1)
 {

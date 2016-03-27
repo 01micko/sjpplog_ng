@@ -84,29 +84,10 @@ sub txt2html
 sub getdate
 {
 	my $gmt = $_[0];
-	my $date = gmtime;
-	my @dat = split(' ', $date);
-	my @time = split(':',$dat[3]);
-	
-	my $day = $dat[2];
-	my $hour = $time[0]+$gmt;
-			
-	if($hour < 1)
-	{
-		$hour = floor($hour+24);
-		$day--;
-	}
-	 elsif($hour > 24)
-	 {
-			 $hour = floor(((25-$hour)*-1)+1); #110712 sc0ttman
-			 $day++;
-	 }
-	 if($hour == 24)
-	 {
-			 $hour = 0;
-			 $day++;
-	 }
-	return $day.' '.$dat[1].' '.$dat[4].', '.$hour.':'.$time[1];
+	my $epoch = time() + $gmt*60*60;
+	my $tt = strftime "%e %b %Y, %H:%M\n", gmtime($epoch);
+	$tt =~ s/^\s+|\s+$//g;
+	return $tt;
 }
 
 sub array_unique
