@@ -312,7 +312,7 @@ if($triedAsAdmin == 0)
 	foreach(@users)
 	{
 		my @data = split(/'/, $_);
-		my $auth = $data[0].', ';
+		my $auth = $data[0].' ';
 		push(@listAuthors,$auth);
 	}
 }
@@ -1983,7 +1983,7 @@ elsif(r('sendComment') ne '')
 	{
 		if($_ eq $author)
 		{
-			my tryPass = crypt($pass, $config_randomString);
+			my $tryPass = crypt($pass, $config_randomString);
 			open(FILE, "<$config_adminPassFile");
 			my $adminPass = '';
 			while(<FILE>)
