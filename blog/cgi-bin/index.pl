@@ -1983,7 +1983,16 @@ elsif(r('sendComment') ne '')
 	{
 		if($_ eq $author)
 		{
-			unless($pass eq $config_adminPass)		# Prevent users from using nicks like "admin"
+			my tryPass = crypt($pass, $config_randomString);
+			open(FILE, "<$config_adminPassFile");
+			my $adminPass = '';
+			while(<FILE>)
+			{
+				$adminPass.=$_;
+			}
+			close(FILE);
+			
+			unless($tryPass eq $adminPass)		# Prevent users from using nicks like "admin"
 			{
 				$do = 0;
 				dienice("Wrong password for using '.$_.' as nickname");
