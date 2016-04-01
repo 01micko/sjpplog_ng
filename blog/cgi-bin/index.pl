@@ -1124,8 +1124,13 @@ elsif (r('do') eq 'changePass')
 	print '<h1>Change Password</h1>
 	<form accept-charset="UTF-8" name="form1" method="post">
 	<table>
+	<tr>
 	<td>User</td>
 	<td><input name="user" type="text" id="user"></td>
+	</tr>
+	<tr>
+	<td>Old Pass</td>
+	<td><input name="oldpass" type="password" id="oldpass">
 	</tr>
 	<tr>
 	<td>New Pass</td>
@@ -1142,13 +1147,17 @@ elsif (r('do') eq 'changePass')
 elsif (r('process') eq 'newPassword')
 {
 	my $user = r('user');
+	my $oldpass =r('oldpass');
 	my $newpass = r('newpass');
-	print '<b>'.$user.'</b>: Your new password is <b>'.$newpass.'</b><br /><br />';
+	#print '<b>'.$user.'</b>: Your new password is <b>'.$newpass.'</b><br /><br />';
 	my $encNewPass = crypt($newpass, $config_randomString);
 	
 	# check if user or commenter 210316
 	my $dataFile = "$config_postsDatabaseFolder/users.$config_dbFilesExtension.dat";
-	my $result = 2;
+	my $commentDataFile = "$config_commentsDatabaseFolder/users.$config_dbFilesExtension.dat";
+	my $resultBlogger = 2;
+	my $resultCommenter = 1;
+	# blogger check
 	open(AFILE, "<$dataFile") or dienice("Could not open file");
 	while(<AFILE>)
 	{
@@ -1158,38 +1167,116 @@ elsif (r('process') eq 'newPassword')
 			my @bUser = split(/'/, $_);
 			if ($bUser[0] eq $user)
 			{
-				$result = 0;
+				$resultBlogger = 0;
+				$resultCommenter = 0;
 				last;
 			}
 		}
 	}
 	close(AFILE);
-	if ($result == 2)
+	# commenter check
+	open(BFILE, "<$commentDataFile") or dienice("Could not open file");
+	while(<BFILE>)
+	{
+		my @blogUser = split(/"/, $_);
+		foreach(@blogUser)
+		{
+			my @bUser = split(/'/, $_);
+			if ($bUser[0] eq $user)
+			{
+				$resultCommenter = 0;
+				last;
+			}
+		}
+	}
+	close(BFILE);
+	
+	if ($resultCommenter == 1)
 	{
 		dienice("No user of that name.");
 	}
-	# rewrite the users file
-	open(FILE, "<$dataFile") or dienice("Could not open file.");
-	close(FILE);
-	my $encOldPass = '';
+	# authenticate old password - only need to check comment files as they are the same
+	# but both must be rewritten
+	open(CFILE, "<$commentDataFile");
+	my $data = '';
+	while(<CFILE>)
+	{
+		$data.=$_;
+	}
+	close(CFILE);
 	my @users = split(/"/, $data);
-	open(NFILE, ">>$dataFile.new") or dienice("Could not open file.");
 	foreach(@users)
 	{
 		my @data = split(/'/, $_);
 		if($user eq $data[0])
 		{
-			$encOldPass = $data[1];
-			print NFILE $user."'".$encNewPass.'"';
-		}
-		else
-		{
-			print NFILE $data[0]."'".$data[1].'"';
+			if(crypt($oldpass, $config_randomString) ne $data[1])
+			{
+				dienice ('Old Passwords do not match!');
+			}
+			last;
 		}
 	}
-	close (NFILE);
-	move($dataFile.'.new', $dataFile) or dienice("The move operation failed.");
-	print '<b>Password is updated!</b>';
+	
+	# rewrite the users files
+	if ($resultBlogger eq 0)
+	{
+		my $data = '';
+		open(FILE, "<$dataFile") or dienice("Could not open file.");
+		while(<FILE>)
+		{
+			$data .=$_;
+		}
+		close(FILE);
+		my $encOldPass = '';
+		my @users = split(/"/, $data);
+		open(NFILE, ">>$dataFile.new") or dienice("Could not open file.");
+		foreach(@users)
+		{
+			my @data = split(/'/, $_);
+			if($user eq $data[0])
+			{
+				$encOldPass = $data[1];
+				print NFILE $user."'".$encNewPass.'"';
+			}
+			else
+			{
+				print NFILE $data[0]."'".$data[1].'"';
+			}
+		}
+		close (NFILE);
+		move($dataFile.'.new', $dataFile) or dienice("The move operation failed.");
+		print '<b>Poster Password is updated!</b>';
+	}
+	if ($resultCommenter eq 0)
+	{
+		my $data = '';
+		open(HFILE, "<$commentDataFile") or dienice("Could not open file.");
+		while(<HFILE>)
+		{
+			$data .=$_;
+		}
+		close(HFILE);
+		my $encOldPass = '';
+		my @users = split(/"/, $data);
+		open(OFILE, ">>$commentDataFile.new") or dienice("Could not open file.");
+		foreach(@users)
+		{
+			my @data = split(/'/, $_);
+			if($user eq $data[0])
+			{
+				$encOldPass = $data[1];
+				print OFILE $user."'".$encNewPass.'"';
+			}
+			else
+			{
+				print OFILE $data[0]."'".$data[1].'"';
+			}
+		}
+		close (OFILE);
+		move($commentDataFile.'.new', $commentDataFile) or dienice("The move operation failed.");
+		print '<b> Commenter Password is updated!</b>';
+	}
 }
 elsif(r('process') eq 'doAddMember')
 {
