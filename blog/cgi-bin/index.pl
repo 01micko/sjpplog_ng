@@ -1525,6 +1525,7 @@ elsif(r('edit') ne '')
 	print '<h1>Editing Entry...</h1>
 	<form accept-charset="UTF-8" name="form1" method="post">
 	<table>
+	<tr>
 	<td>User</td>
 	<td><input name="user" type="text" id="user"></td>
 	</tr>
@@ -1566,10 +1567,6 @@ elsif(r('process') eq 'editSecured')
 		}
 		$administrator = 1;
 	}
-	elsif(! -s $config_adminPassFile)
-	{
-		dienice("An Administrator Password must be set!");
-	}
 	else
 	{
 		# login and edit as user
@@ -1586,16 +1583,19 @@ elsif(r('process') eq 'editSecured')
 		foreach(@users)
 		{
 			my @data = split(/'/, $_);
-			if($bloguser eq $data[0])
+			if($user eq $data[0])
 			{
-				if(crypt($pass, $config_randomString) ne $data[1])
+				if(crypt($pass, $config_randomString) eq $data[1])
 				{
-					$auth = 0;
+					$auth = 1;
+					$administrator = 0;
+				}
+				else
+				{
+					dienice('Wrong password');
 				}
 				last;
 			}
-			$auth = 1;
-			$administrator = 0;
 		}
 	}
 	
